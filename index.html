@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Para ti ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(#a8e6cf, #dcedc1);
+      font-family: Arial;
+      overflow: hidden;
+    }
+
+    .tree {
+      font-size: 20px;
+      animation: grow 4s ease-in-out forwards;
+    }
+
+    @keyframes grow {
+      0% { transform: scale(0); }
+      100% { transform: scale(10); }
+    }
+
+    .message {
+      position: absolute;
+      bottom: 50px;
+      font-size: 24px;
+      opacity: 0;
+      transition: 2s;
+    }
+  </style>
+</head>
+<body>
+
+<div class="tree">🌱</div>
+<div class="message">Te quiero mucho ❤️</div>
+
+<script>
+  setTimeout(() => {
+    document.querySelector('.tree').textContent = "🌳";
+  }, 2000);
+
+  setTimeout(() => {
+    document.querySelector('.message').style.opacity = 1;
+  }, 4000);
+</script>
+
+</body>
+</html>
