@@ -1,51 +1,209 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Para ti ❤️</title>
+  <title>Para mi goldita ❤️</title>
+
   <style>
     body {
       margin: 0;
       height: 100vh;
+      background: radial-gradient(circle, #ffd1dc, #ff9aa2);
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(#a8e6cf, #dcedc1);
-      font-family: Arial;
       overflow: hidden;
+      font-family: Arial;
     }
 
-    .tree {
-      font-size: 20px;
-      animation: grow 4s ease-in-out forwards;
+    svg {
+      width: 650px;
+      height: 750px;
     }
 
-    @keyframes grow {
-      0% { transform: scale(0); }
-      100% { transform: scale(10); }
+    /* Tronco */
+    .trunk {
+      fill: #5d4037;
+      transform: scaleY(0);
+      transform-origin: bottom;
+      animation: growTrunk 3s forwards;
     }
 
+    @keyframes growTrunk {
+      to { transform: scaleY(1); }
+    }
+
+    /* Copa */
+    .tree-top {
+      opacity: 0;
+      transform: scale(0);
+      transform-origin: center;
+      animation: growTop 3s forwards;
+      animation-delay: 3s;
+    }
+
+    @keyframes growTop {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Brillo */
+    .glow {
+      fill: #66bb6a;
+      opacity: 0.3;
+      filter: blur(10px);
+    }
+
+    /* Flores */
+    .flower {
+      fill: #ff80ab;
+      opacity: 0;
+      animation: show 2s forwards;
+    }
+
+    .f1 { animation-delay: 5s; }
+    .f2 { animation-delay: 5.2s; }
+    .f3 { animation-delay: 5.4s; }
+    .f4 { animation-delay: 5.6s; }
+    .f5 { animation-delay: 5.8s; }
+    .f6 { animation-delay: 6s; }
+    .f7 { animation-delay: 6.2s; }
+    .f8 { animation-delay: 6.4s; }
+    .f9 { animation-delay: 6.6s; }
+    .f10 { animation-delay: 6.8s; }
+
+    @keyframes show {
+      to { opacity: 1; }
+    }
+
+    /* Nombre */
+    .name {
+      fill: white;
+      font-size: 40px;
+      opacity: 0;
+      animation: show 2s forwards;
+      animation-delay: 7s;
+      text-anchor: middle;
+    }
+
+    /* Mensaje */
     .message {
       position: absolute;
-      bottom: 50px;
-      font-size: 24px;
+      bottom: 40px;
+      color: white;
+      font-size: 34px;
       opacity: 0;
       transition: 2s;
+      text-align: center;
     }
+
+    /* Corazones */
+    .heart {
+      position: absolute;
+      color: red;
+      font-size: 22px;
+      animation: fall 6s linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100px); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+
+    /* Pétalos */
+    .petal {
+      position: absolute;
+      color: pink;
+      font-size: 18px;
+      animation: fallPetal 8s linear infinite;
+    }
+
+    @keyframes fallPetal {
+      0% { transform: translateY(-100px) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+
   </style>
 </head>
+
 <body>
 
-<div class="tree">🌱</div>
-<div class="message">Te quiero mucho ❤️</div>
+<svg viewBox="0 0 200 300">
+
+  <!-- Tronco -->
+  <rect class="trunk" x="80" y="170" width="40" height="150" rx="20"/>
+
+  <!-- Copa gigante -->
+  <g class="tree-top">
+    <circle cx="100" cy="110" r="70" fill="#2e7d32"/>
+    <circle cx="50" cy="120" r="60" fill="#2e7d32"/>
+    <circle cx="150" cy="120" r="60" fill="#2e7d32"/>
+    <circle cx="100" cy="60" r="55" fill="#2e7d32"/>
+
+    <!-- brillo -->
+    <circle class="glow" cx="100" cy="110" r="90"/>
+  </g>
+
+  <!-- MUCHAS flores -->
+  <circle class="flower f1" cx="70" cy="100" r="7"/>
+  <circle class="flower f2" cx="130" cy="110" r="7"/>
+  <circle class="flower f3" cx="100" cy="80" r="7"/>
+  <circle class="flower f4" cx="80" cy="140" r="7"/>
+  <circle class="flower f5" cx="120" cy="150" r="7"/>
+  <circle class="flower f6" cx="60" cy="140" r="7"/>
+  <circle class="flower f7" cx="140" cy="140" r="7"/>
+  <circle class="flower f8" cx="90" cy="120" r="7"/>
+  <circle class="flower f9" cx="110" cy="120" r="7"/>
+  <circle class="flower f10" cx="100" cy="140" r="7"/>
+
+  <!-- Nombre -->
+
+
+</svg>
+
+<div class="message" id="msg">Te quiero muchísimo goldita ❤️</div>
 
 <script>
   setTimeout(() => {
-    document.querySelector('.tree').textContent = "🌳";
-  }, 2000);
+    document.getElementById('msg').style.opacity = 1;
+  }, 8000);
 
-  setTimeout(() => {
-    document.querySelector('.message').style.opacity = 1;
+  const mensajes = [
+    "Te quiero muchísimo goldita ❤️",
+    "para ti mi niña 💖",
+    "Contigo todo es mágico mi goldita ✨",
+    "Siempre tú mi niña💕"
+  ];
+
+  let i = 0;
+  setInterval(() => {
+    i = (i + 1) % mensajes.length;
+    document.getElementById('msg').textContent = mensajes[i];
   }, 4000);
+
+  function crearCorazon() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+  }
+
+  function crearPetalo() {
+    const petal = document.createElement("div");
+    petal.classList.add("petal");
+    petal.innerHTML = "🌸";
+    petal.style.left = Math.random() * window.innerWidth + "px";
+    document.body.appendChild(petal);
+
+    setTimeout(() => petal.remove(), 8000);
+  }
+
+  setInterval(crearCorazon, 300);
+  setInterval(crearPetalo, 500);
 </script>
 
 </body>
